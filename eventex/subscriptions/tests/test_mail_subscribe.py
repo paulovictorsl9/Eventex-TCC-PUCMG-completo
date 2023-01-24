@@ -6,7 +6,7 @@ from django.shortcuts import resolve_url as r
 class SubscribePostValid(TestCase):
 	def setUp(self):
 		data = dict(name='Henrique Bastos', cpf='12345678901',
-				    email='henrique@bastos.net', phone='21-99618-6180')
+				    email='paulovictorsl9@hotmail.com', phone='21-99618-6180')
 		self.client.post(r('subscriptions:new'), data)
 		self.email = mail.outbox[0]
 
@@ -16,12 +16,12 @@ class SubscribePostValid(TestCase):
 		self.assertEqual(expect, self.email.subject)
 
 	def test_subscription_email_from(self):
-		expect = 'contato@eventex.com.br'
+		expect = 'paulovictorsl9@hotmail.com'
 
 		self.assertEqual(expect, self.email.from_email)
 
 	def test_subscription_email_to(self):
-		expect = ['contato@eventex.com.br', 'henrique@bastos.net']
+		expect = ['paulovictorsl9@hotmail.com', 'paulovictorsl9@hotmail.com']
 
 		self.assertEqual(expect, self.email.to)
 
@@ -29,7 +29,7 @@ class SubscribePostValid(TestCase):
 		contents = [
 			'Henrique Bastos',
 			'12345678901',
-			'henrique@bastos.net',
+			'paulovictorsl9@hotmail.com',
 			'21-99618-6180',
 		]
 		for content in contents:
